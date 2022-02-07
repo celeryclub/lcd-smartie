@@ -1,7 +1,7 @@
 {
-  "name": "smartie-driver",
+  "name": "smartie-node",
   "version": "0.1.0",
-  "description": "Node driver for Sure Smartie LCD displays (http://store3.sure-electronics.com)",
+  "description": "Node driver for Sure Smartie LCD displays",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
