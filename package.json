@@ -2,21 +2,20 @@
   "name": "smartie-node",
   "version": "0.1.0",
   "description": "Node driver for Sure Smartie LCD displays",
+  "author": "Steve Davis <steve@celery.club>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/celeryclub/smartie-driver.git"
+  },
+  "engines": {
+    "node": "16.x"
+  },
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/celeryclub/smartie-driver.git"
-  },
-  "author": "Steve Davis <steve@celery.club>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/celeryclub/smartie-driver/issues"
-  },
-  "homepage": "https://github.com/celeryclub/smartie-driver#readme",
   "dependencies": {
-    "serialport": "^7.1.5"
+    "serialport": "^9.2.8"
   }
 }
