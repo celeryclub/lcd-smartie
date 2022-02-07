@@ -9,16 +9,18 @@
     "url": "https://github.com/celeryclub/smartie-driver.git"
   },
   "engines": {
-    "node": "16.x"
+    "node": "^16"
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write ."
   },
   "dependencies": {
     "serialport": "^9.2.8"
   },
   "devDependencies": {
+    "prettier": "^2.5.1",
     "yargs": "^17.3.1"
   }
 }
