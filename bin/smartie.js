@@ -1,4 +1,4 @@
-const Smartie = require('../lib/index');
+const Smartie = require('../src/index');
 const lcd = new Smartie();
 
 const argv = require('yargs/yargs')(process.argv.slice(2))
