@@ -3,6 +3,7 @@ const SerialPort = require('serialport');
 const DEFAULT_TTY_PATH = '/dev/ttyUSB0';
 const DEFAULT_WIDTH = 20;
 const DEFAULT_HEIGHT = 4;
+const COMMAND_DELAY = 40;
 
 class Smartie {
   constructor(
@@ -15,28 +16,34 @@ class Smartie {
     this.height = height;
   }
 
-  send(bytes) {
+  async send(bytes) {
+    console.log('send', bytes)
     const buffer = Buffer.from([0xfe].concat(bytes));
     this.lcd.write(buffer);
+    // await this.sleep()
+    console.log('sleep start')
+    await new Promise(resolve => setTimeout(resolve, COMMAND_DELAY));
+    console.log('sleep end')
   }
 
-  backlightOn() {
-    this.send([0x42, 0x00]);
+  async backlightOn() {
+    await this.send([0x42, 0x00]);
   }
 
-  backlightOff() {
-    this.send(0x46);
+  async backlightOff() {
+    await this.send(0x46);
   }
 
-  setBrightness(amount) {
-    this.send([0x98, amount]);
+  async setBrightness(amount) {
+    await this.send([0x98, amount]);
   }
 
-  setContrast(amount) {
-    this.send([0x50, amount]);
+  async setContrast(amount) {
+    await this.send([0x50, amount]);
   }
 
-  writeLine(data, line = 1) {
+  async writeLine(data, line = 1) {
+    console.log('writeLine', data, line)
     if (!line || line < 1 || line > this.height) {
       line = 1;
     }
@@ -49,14 +56,25 @@ class Smartie {
       arr.push(ascii);
     }
 
-    this.send([0x47, 0x01, line].concat(arr));
+    await this.send([0x47, 0x01, line].concat(arr));
   }
 
-  clearScreen() {
-    for (let i = 0; i < height; i++) {
-      this.writeLine('', i);
+  async clearScreen() {
+    // await this.writeLine('', 1);
+    // await this.writeLine('', 2);
+    // await this.writeLine('', 3);
+    // await this.writeLine('', 4);
+    for (let i = 0; i < this.height; i++) {
+      await this.writeLine('', i);
     }
   }
+
+  // async sleep() {
+  //   console.log('sleep')
+  //   return new Promise((resolve) => {
+  //     setTimeout(() => resolve, COMMAND_DELAY);
+  //   });
+  // }
 }
 
 module.exports = Smartie;
