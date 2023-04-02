@@ -11,16 +11,24 @@
   "engines": {
     "node": "^18"
   },
-  "main": "src/index.js",
+  "main": "dist/main.js",
   "scripts": {
+    "watch": "nodemon ./src/main.ts",
+    "build": "tsc --outDir ./dist",
+    "start": "node ./dist/main.js",
+    "tsc": "tsc --noEmit",
     "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write ."
+    "prettier:fix": "prettier --write .",
+    "lint": "npm run tsc && npm run prettier"
   },
   "dependencies": {
     "serialport": "^10.5.0"
   },
   "devDependencies": {
+    "@types/node": "^18.15.11",
+    "nodemon": "^2.0.22",
     "prettier": "^2.8.4",
+    "ts-node": "^10.9.1",
     "yargs": "^17.3.1"
   }
 }
