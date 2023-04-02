@@ -1,36 +1,36 @@
-const Smartie = require('../src/index');
+const Smartie = require("../src/index");
 const lcd = new Smartie();
 
-const argv = require('yargs/yargs')(process.argv.slice(2))
+const argv = require("yargs/yargs")(process.argv.slice(2))
   .options({
     backlight: {
-      type: 'string',
+      type: "string",
     },
     brightness: {
-      alias: 'b',
-      type: 'number',
+      alias: "b",
+      type: "number",
     },
     contrast: {
-      alias: 'c',
-      type: 'number',
+      alias: "c",
+      type: "number",
     },
     line: {
-      alias: 'l',
-      type: 'number',
+      alias: "l",
+      type: "number",
     },
     message: {
-      alias: 'm',
-      type: 'string',
+      alias: "m",
+      type: "string",
     },
     clear: {
-      alias: 'c',
+      alias: "c",
     },
   })
   .help().argv;
 
-if (argv.backlight === 'on') {
+if (argv.backlight === "on") {
   lcd.backlightOn();
-} else if (argv.backlight === 'off') {
+} else if (argv.backlight === "off") {
   lcd.backlightOff();
 } else if (argv.brightness) {
   // 0 to 255

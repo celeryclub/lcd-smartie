@@ -1,29 +1,25 @@
-const SerialPort = require('serialport');
+const SerialPort = require("serialport");
 
-const DEFAULT_TTY_PATH = '/dev/ttyUSB0';
+const DEFAULT_TTY_PATH = "/dev/ttyUSB0";
 const DEFAULT_WIDTH = 20;
 const DEFAULT_HEIGHT = 4;
 const COMMAND_DELAY = 40;
 
 class Smartie {
-  constructor(
-    ttyPath = DEFAULT_TTY_PATH,
-    width = DEFAULT_WIDTH,
-    height = DEFAULT_HEIGHT
-  ) {
+  constructor(ttyPath = DEFAULT_TTY_PATH, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
     this.lcd = new SerialPort(ttyPath);
     this.width = width;
     this.height = height;
   }
 
   async send(bytes) {
-    console.log('send', bytes)
+    console.log("send", bytes);
     const buffer = Buffer.from([0xfe].concat(bytes));
     this.lcd.write(buffer);
     // await this.sleep()
-    console.log('sleep start')
+    console.log("sleep start");
     await new Promise(resolve => setTimeout(resolve, COMMAND_DELAY));
-    console.log('sleep end')
+    console.log("sleep end");
   }
 
   async backlightOn() {
@@ -43,7 +39,7 @@ class Smartie {
   }
 
   async writeLine(data, line = 1) {
-    console.log('writeLine', data, line)
+    console.log("writeLine", data, line);
     if (!line || line < 1 || line > this.height) {
       line = 1;
     }
@@ -65,7 +61,7 @@ class Smartie {
     // await this.writeLine('', 3);
     // await this.writeLine('', 4);
     for (let i = 0; i < this.height; i++) {
-      await this.writeLine('', i);
+      await this.writeLine("", i);
     }
   }
 
