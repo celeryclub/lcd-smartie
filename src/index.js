@@ -7,7 +7,7 @@ const COMMAND_DELAY = 40;
 
 class Smartie {
   constructor(ttyPath = DEFAULT_TTY_PATH, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
-    this.lcd = new SerialPort(ttyPath);
+    this.lcd = new SerialPort({ path: ttyPath, baudRate: 9600 });
     this.width = width;
     this.height = height;
   }
