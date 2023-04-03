@@ -1,29 +1,27 @@
 import { SerialPort } from "serialport";
 
+const COMMAND_DELAY = 40;
+
 const DEFAULT_TTY_PATH = "/dev/ttyUSB0";
 const DEFAULT_WIDTH = 20;
 const DEFAULT_HEIGHT = 4;
-const COMMAND_DELAY = 40;
 
 export default class Smartie {
-  private lcd: SerialPort;
-  private width: number;
-  private height: number;
+  private _port: SerialPort;
+  private _width: number;
+  private _height: number;
 
   constructor(ttyPath = DEFAULT_TTY_PATH, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
-    this.lcd = new SerialPort({ path: ttyPath, baudRate: 9600 });
-    this.width = width;
-    this.height = height;
+    this._port = new SerialPort({ path: ttyPath, baudRate: 9600 });
+    this._width = width;
+    this._height = height;
   }
 
   async send(bytes: number[]) {
-    console.log("send", bytes);
     const buffer = Buffer.from([0xfe].concat(bytes));
-    this.lcd.write(buffer);
-    // await this.sleep()
-    console.log("sleep start");
+    this._port.write(buffer);
+
     await new Promise(resolve => setTimeout(resolve, COMMAND_DELAY));
-    console.log("sleep end");
   }
 
   async backlightOn() {
@@ -36,11 +34,21 @@ export default class Smartie {
 
   // Brightness range is 0-255
   async setBrightness(amount: number) {
+    if (amount < 0 || amount > 255) {
+      console.error("Brightness amount must be between 0 and 255");
+      return;
+    }
+
     await this.send([0x98, amount]);
   }
 
   // Contrast range is 0-255
   async setContrast(amount: number) {
+    if (amount < 0 || amount > 255) {
+      console.error("Contrast amount must be between 0 and 255");
+      return;
+    }
+
     await this.send([0x50, amount]);
   }
 
@@ -53,24 +61,12 @@ export default class Smartie {
 
     // Pad short strings and trim long strings
     message = message.padEnd(this._width).substring(0, this._width);
-
     await this.send([0x47, 0x01, lineNumber].concat(...Buffer.from(message)));
   }
 
-  async clearScreen() {
-    // await this.writeLine('', 1);
-    // await this.writeLine('', 2);
-    // await this.writeLine('', 3);
-    // await this.writeLine('', 4);
-    for (let i = 0; i < this.height; i++) {
+  async clear() {
+    for (let i = 0; i < this._height; i++) {
       await this.writeLine("", i);
     }
   }
-
-  // async sleep() {
-  //   console.log('sleep')
-  //   return new Promise((resolve) => {
-  //     setTimeout(() => resolve, COMMAND_DELAY);
-  //   });
-  // }
 }
