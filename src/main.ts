@@ -34,29 +34,27 @@ export default class Smartie {
     await this.send([0x46]);
   }
 
+  // Brightness range is 0-255
   async setBrightness(amount: number) {
     await this.send([0x98, amount]);
   }
 
+  // Contrast range is 0-255
   async setContrast(amount: number) {
     await this.send([0x50, amount]);
   }
 
-  async writeLine(message: string, lineNumber = 1) {
-    // console.log("writeLine", message, lineNumber);
-    if (!lineNumber || lineNumber < 1 || lineNumber > this.height) {
-      lineNumber = 1;
+  // Line number range is 0 to screen height - 1
+  async writeLine(message: string, lineNumber: number) {
+    if (lineNumber < 0 || lineNumber > this._height - 1) {
+      console.error("Line number must be within range of screen height");
+      return;
     }
 
-    message = message.padEnd(this.width).substring(0, this.width);
+    // Pad short strings and trim long strings
+    message = message.padEnd(this._width).substring(0, this._width);
 
-    var arr = [];
-    for (var i = 0, l = message.length; i < l; i++) {
-      var ascii = message.charCodeAt(i);
-      arr.push(ascii);
-    }
-
-    await this.send([0x47, 0x01, lineNumber].concat(arr));
+    await this.send([0x47, 0x01, lineNumber].concat(...Buffer.from(message)));
   }
 
   async clearScreen() {
