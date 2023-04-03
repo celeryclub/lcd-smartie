@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/celeryclub/lcd-smartie.git"
   },
+  "type": "module",
   "engines": {
     "node": "^18"
   },
