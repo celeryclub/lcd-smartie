@@ -18,8 +18,7 @@ export default class Smartie {
   }
 
   async send(bytes: number[]) {
-    const buffer = Buffer.from([0xfe].concat(bytes));
-    this._port.write(buffer);
+    this._port.write([0xfe].concat(bytes));
 
     await new Promise(resolve => setTimeout(resolve, COMMAND_DELAY));
   }
