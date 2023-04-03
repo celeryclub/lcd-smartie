@@ -70,3 +70,14 @@ export default class Smartie {
     }
   }
 }
+
+(async () => {
+  const smartie = new Smartie();
+
+  await smartie.backlightOn();
+  await smartie.backlightOff();
+  await smartie.setBrightness(45);
+  await smartie.setContrast(205);
+  await smartie.writeLine("hello", 2);
+  await smartie.clear();
+})();
