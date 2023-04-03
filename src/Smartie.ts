@@ -15,17 +15,17 @@ export default class Smartie {
     this._height = height;
   }
 
-  async send(bytes: number[]) {
+  private async _send(bytes: number[]) {
     this._port.write([0xfe].concat(bytes));
     await new Promise(resolve => this._port.drain(resolve));
   }
 
   async backlightOn() {
-    await this.send([0x42, 0x00]);
+    await this._send([0x42, 0x00]);
   }
 
   async backlightOff() {
-    await this.send([0x46]);
+    await this._send([0x46]);
   }
 
   // Brightness range is 0-255
@@ -35,7 +35,7 @@ export default class Smartie {
       return;
     }
 
-    await this.send([0x98, amount]);
+    await this._send([0x98, amount]);
   }
 
   // Contrast range is 0-255
@@ -45,7 +45,7 @@ export default class Smartie {
       return;
     }
 
-    await this.send([0x50, amount]);
+    await this._send([0x50, amount]);
   }
 
   // Line number range is 0 to screen height - 1
@@ -57,7 +57,7 @@ export default class Smartie {
 
     // Pad short strings and trim long strings
     message = message.padEnd(this._width).substring(0, this._width);
-    await this.send([0x47, 0x01, lineNumber].concat(...Buffer.from(message)));
+    await this._send([0x47, 0x01, lineNumber].concat(...Buffer.from(message)));
   }
 
   async clear() {
