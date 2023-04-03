@@ -12,11 +12,11 @@
   "engines": {
     "node": "^18"
   },
-  "main": "dist/main.js",
+  "main": "dist/Smartie.js",
   "scripts": {
-    "watch": "nodemon ./src/main.ts",
+    "watch": "nodemon ./src/Smartie.ts",
     "build": "tsc --outDir ./dist",
-    "start": "npm run build && node ./dist/main.js",
+    "start": "npm run build && node ./dist/Smartie.js",
     "tsc": "tsc --noEmit",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
