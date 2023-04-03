@@ -1,7 +1,5 @@
 import { SerialPort } from "serialport";
 
-const COMMAND_DELAY = 40;
-
 const DEFAULT_TTY_PATH = "/dev/ttyUSB0";
 const DEFAULT_WIDTH = 20;
 const DEFAULT_HEIGHT = 4;
@@ -19,8 +17,7 @@ export default class Smartie {
 
   async send(bytes: number[]) {
     this._port.write([0xfe].concat(bytes));
-
-    await new Promise(resolve => setTimeout(resolve, COMMAND_DELAY));
+    await new Promise(resolve => this._port.drain(resolve));
   }
 
   async backlightOn() {
