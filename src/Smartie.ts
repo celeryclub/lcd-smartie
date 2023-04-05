@@ -8,6 +8,11 @@ export class Smartie {
   private _width: number;
   private _height: number;
 
+  static fromPath(path: string, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT): Smartie {
+    const port = new SerialPort({ path, baudRate: 9600 });
+    return new Smartie(port, width, height);
+  }
+
   constructor(port: SerialPort, width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT) {
     this._port = port;
     this._width = width;
