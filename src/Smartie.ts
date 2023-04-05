@@ -57,7 +57,7 @@ export default class Smartie {
 
     // Pad short strings and trim long strings
     message = message.padEnd(this._width).substring(0, this._width);
-    await this._send([0x47, 0x01, lineNumber].concat(...Buffer.from(message)));
+    await this._send([0x47, 0x01, lineNumber + 1].concat(...Buffer.from(message)));
   }
 
   async clear() {
