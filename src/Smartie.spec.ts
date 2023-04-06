@@ -72,7 +72,7 @@ describe("Smartie", () => {
 
     it("should reject if line number is outside of valid range", async () => {
       await expect(smartie.writeLine("hi", 99)).to.be.rejectedWith(
-        "Line number must be within range of screen height"
+        "Line number must be between 0 and 3"
       );
     });
   });

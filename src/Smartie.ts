@@ -53,7 +53,7 @@ export class Smartie {
   // Line number range is 0 to screen height - 1
   async writeLine(message: string, lineNumber: number) {
     if (lineNumber < 0 || lineNumber > this._height - 1) {
-      throw new Error("Line number must be within range of screen height");
+      throw new Error(`Line number must be between 0 and ${this._height - 1}`);
     }
 
     // Pad short strings and trim long strings
