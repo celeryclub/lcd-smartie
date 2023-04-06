@@ -1,6 +1,6 @@
 {
   "name": "lcd-smartie",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "LCD Smartie driver written in Node.js",
   "author": "Steve Davis <steve@celery.club>",
   "license": "MIT",
@@ -17,8 +17,8 @@
     "smartie": "bin/smartie.js"
   },
   "scripts": {
-    "build": "tsc",
     "clean": "rm -rf dist",
+    "build": "tsc",
     "tsc": "tsc --noEmit",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
