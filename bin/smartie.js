@@ -1,7 +1,12 @@
-const Smartie = require("../src/index");
-const lcd = new Smartie();
+#!/usr/bin/env node
 
-const argv = require("yargs/yargs")(process.argv.slice(2))
+import yargs from "yargs/yargs";
+import { hideBin } from "yargs/helpers";
+import { Smartie } from "../dist/src/Smartie.js";
+
+const smartie = Smartie.fromPath("/dev/ttyUSB0");
+
+const argv = yargs(hideBin(process.argv))
   .options({
     backlight: {
       type: "string",
@@ -29,17 +34,17 @@ const argv = require("yargs/yargs")(process.argv.slice(2))
   .help().argv;
 
 if (argv.backlight === "on") {
-  lcd.backlightOn();
+  smartie.backlightOn();
 } else if (argv.backlight === "off") {
-  lcd.backlightOff();
+  smartie.backlightOff();
 } else if (argv.brightness) {
   // 0 to 255
-  lcd.setBrightness(argv.brightness);
+  smartie.setBrightness(argv.brightness);
 } else if (argv.contrast) {
   // 0 to 255
-  lcd.setContrast(argv.contrast);
+  smartie.setContrast(argv.contrast);
 } else if (argv.message) {
-  lcd.writeLine(argv.message, argv.line);
+  smartie.writeLine(argv.message, argv.line);
 } else if (argv.clear) {
-  lcd.clearScreen();
+  smartie.clear();
 }

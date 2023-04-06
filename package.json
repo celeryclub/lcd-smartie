@@ -13,6 +13,9 @@
     "node": "^18"
   },
   "main": "dist/Smartie.js",
+  "bin": {
+    "smartie": "bin/smartie.js"
+  },
   "scripts": {
     "build": "tsc --outDir ./dist",
     "start": "ts-node --esm ./src/Smartie.ts",
@@ -23,11 +26,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "serialport": "^10.5.0"
+    "serialport": "^10.5.0",
+    "yargs": "^17.7.1"
   },
   "devDependencies": {
-    "@types/chai-as-promised": "^7.1.5",
     "@types/chai": "^4.3.4",
+    "@types/chai-as-promised": "^7.1.5",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
     "@types/sinon-chai": "^3.2.9",
@@ -39,7 +43,6 @@
     "sinon-chai": "^3.7.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "ts-sinon": "^2.0.2",
-    "yargs": "^17.3.1"
+    "ts-sinon": "^2.0.2"
   }
 }
