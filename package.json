@@ -17,8 +17,8 @@
     "smartie": "bin/smartie.js"
   },
   "scripts": {
-    "build": "tsc --outDir ./dist",
-    "start": "ts-node --esm ./src/Smartie.ts",
+    "build": "tsc",
+    "clean": "rm -rf dist",
     "tsc": "tsc --noEmit",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
@@ -42,7 +42,6 @@
     "sinon": "^15.0.3",
     "sinon-chai": "^3.7.0",
     "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.1",
     "ts-sinon": "^2.0.2"
   }
 }

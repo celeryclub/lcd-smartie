@@ -2,7 +2,7 @@
 
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
-import { Smartie } from "../dist/src/Smartie.js";
+import { Smartie } from "../dist/Smartie.js";
 
 yargs(hideBin(process.argv))
   .options({
