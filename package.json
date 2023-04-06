@@ -23,7 +23,8 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "lint": "npm run tsc && npm run prettier",
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "git status --porcelain | grep -q ^ && { echo \"Can't publish unless working directory is clean\"; exit 1; } || npm run clean && npm run build && npm run lint && npm run test"
   },
   "dependencies": {
     "serialport": "^10.5.0",
