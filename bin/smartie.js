@@ -4,10 +4,13 @@ import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 import { Smartie } from "../dist/src/Smartie.js";
 
-const smartie = Smartie.fromPath("/dev/ttyUSB0");
-
 const argv = yargs(hideBin(process.argv))
   .options({
+    path: {
+      alias: "p",
+      type: "string",
+      demandOption: true,
+    },
     backlight: {
       type: "string",
     },
@@ -32,6 +35,8 @@ const argv = yargs(hideBin(process.argv))
     },
   })
   .help().argv;
+
+const smartie = Smartie.fromPath(argv.path);
 
 if (argv.backlight === "on") {
   smartie.backlightOn();
