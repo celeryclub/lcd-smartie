@@ -6,12 +6,22 @@ This project provides a driver for interacting with LCD Smartie devices made by 
 
 This project has been rewritten in Node.js. The original Python version can be found [here](https://github.com/celeryclub/smartie-python).
 
+## Installation
+
+### To use within your own project
+
+`npm install lcd-smartie`
+
+### To use the CLI
+
+`npm install --global lcd-smartie`
+
 ## CLI usage examples
 
 ```sh
-./bin/smartie.js on --path /dev/ttyUSB0
-./bin/smartie.js off --path /dev/ttyUSB0
-./bin/smartie.js adjust --path /dev/ttyUSB0 --brightness 4 --contrast 220
-./bin/smartie.js write --path /dev/ttyUSB0 --message "sup" --line 1
-./bin/smartie.js clear --path /dev/ttyUSB0
+smartie on --path /dev/ttyUSB0
+smartie off --path /dev/ttyUSB0
+smartie adjust --path /dev/ttyUSB0 --brightness 4 --contrast 220
+smartie write --path /dev/ttyUSB0 --message "sup" --line 1
+smartie clear --path /dev/ttyUSB0
 ```
