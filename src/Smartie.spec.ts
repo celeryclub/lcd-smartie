@@ -9,9 +9,6 @@ describe("Smartie", () => {
 
   beforeEach(() => {
     port = stubInterface<SerialPort>();
-    port.drain.callsFake(callback => {
-      setTimeout(callback!, 0);
-    });
     smartie = new Smartie(port);
   });
 

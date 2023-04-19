@@ -1,5 +1,7 @@
 import { SerialPort } from "serialport";
 
+const COMMAND_DELAY = 40;
+
 const DEFAULT_WIDTH = 20;
 const DEFAULT_HEIGHT = 4;
 
@@ -21,7 +23,7 @@ export class Smartie {
 
   private async _send(bytes: number[]) {
     this._port.write([0xfe].concat(bytes));
-    await new Promise(resolve => this._port.drain(resolve));
+    await new Promise(resolve => setTimeout(resolve, COMMAND_DELAY));
   }
 
   async backlightOn() {
